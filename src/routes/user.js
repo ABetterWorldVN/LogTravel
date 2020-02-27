@@ -4,7 +4,9 @@ const PlaceModel = require('../models/Place');
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.send('User');
+  PlaceModel.find((err, docs) => {
+    res.json(docs);
+  });
 });
 
 router.post('/', (req, res) => {
