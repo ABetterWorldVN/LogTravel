@@ -3,7 +3,7 @@ const bodyParse = require('body-parser');
 const mongoose = require('mongoose');
 
 const app = express();
-const user = require('./routes/user');
+const place = require('./routes/place');
 
 const PORT = process.env.PORT || 3009;
 
@@ -17,6 +17,6 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 
 // Router
-app.use('/api/users', user);
+app.use('/api/places', place);
 
 app.listen(PORT, () => console.log(`App is running on PORT ${PORT}`));
