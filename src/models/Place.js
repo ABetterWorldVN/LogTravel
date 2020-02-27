@@ -13,7 +13,8 @@ let placeSchema = new mongoose.Schema({
     long: Number,
     rating: Number,
     comment: String,
-    description: String
+    description: String,
+    imgPath: String
 });
 
 const placeModel = mongoose.model('Place', placeSchema);
