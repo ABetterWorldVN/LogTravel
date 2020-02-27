@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 // define schema
 let placeSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true,
+    },
     visitDate: Date,
     // TODO: check how to save complex object
     // location: {
