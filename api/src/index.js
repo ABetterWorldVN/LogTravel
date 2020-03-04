@@ -1,22 +1,40 @@
 const express = require('express');
-const bodyParse = require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 const place = require('./routes/place');
 
+// load .env file
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3009;
 
 // Connect DB
-mongoose.connect('mongodb://threesometeam:aaa123@ds149030.mlab.com:49030/log-travel');
+const mongoUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/log-travel`;
+mongoose.connect(
+  mongoUrl,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected');
-})
+});
 
-app.use(express.json());
+// enable cross origin
+app.use(cors());
 
-// Router
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// parse application/json
+app.use(bodyParser.json());
+
+// router
 app.use('/api/places', place);
 
 app.listen(PORT, () => console.log(`App is running on PORT ${PORT}`));
