@@ -62,16 +62,14 @@
     </div>
 
     <ul>
-      <!-- <li v-for="(place, index) in places" :key="index">{{ place.name }}</li> -->
-      <!-- <log-travel-item v-for="(place, index) in places" :key="index" :place="place"> </log-travel-item> -->
-      <log-travel-item :place="{name: 'handsome awesome 20cm'}"> </log-travel-item>
+      <log-travel-item v-for="(place, index) in places" :key="index" :place="place"> </log-travel-item>
     </ul>
   </div>
 </template>
 
 <script>
 import API from "../API";
-import LogTravelItem from './components/LogTravelItem';
+import LogTravelItem from './LogTravelItem';
 
 export default {
   name: "LogTravel",
