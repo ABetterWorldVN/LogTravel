@@ -17,7 +17,7 @@ let placeSchema = new mongoose.Schema({
     rating: Number,
     comment: String,
     description: String,
-    imgPath: String
+    imgName: String
 });
 
 const placeModel = mongoose.model('Place', placeSchema);
