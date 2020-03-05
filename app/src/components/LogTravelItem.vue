@@ -7,7 +7,7 @@
           <h5 class="card-title">{{place.name}}</h5>
           <p class="card-text">{{place.description}}</p>
           <p class="card-text">{{place.comment}}</p>
-          <a href="#" class="btn btn-primary">Delete</a>
+          <button @click="deletePlace(place._id)" class="btn btn-primary">Delete</button>
         </div>
       </div>
     </li>
@@ -16,10 +16,16 @@
 
 <script>
     export default {
-    name: "LogTravelItem",
-    props: {
-        place: {}
-    }
+        name: "LogTravelItem",
+        props: {
+            place: {}
+        },
+        methods:{
+            deletePlace(id){
+                console.info('child ' + id);
+                this.$emit('deletePlace', id);
+            }
+        }
     };
 </script>
 

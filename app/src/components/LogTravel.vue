@@ -62,7 +62,10 @@
     </div>
 
     <ul>
-      <log-travel-item v-for="(place, index) in places" :key="index" :place="place"> </log-travel-item>
+      <log-travel-item 
+        v-for="(place, index) in places" :key="index" :place="place"
+        @deletePlace="deletePlace"> 
+      </log-travel-item>
     </ul>
   </div>
 </template>
@@ -105,6 +108,12 @@ export default {
       const newlyAdded = await API.createPlace('/places', this.formData);
       this.shouldShowFormFn();
       this.places = [...this.places, newlyAdded.data];
+    },
+    deletePlace(id){
+      // TODO: delete call API
+      console.info('parent ' + id);
+      const place = this.places.find(x => x._id === id);
+      if (place) this.places.splice(this.places.indexOf(place), 1);
     }
   },
   mounted() {
