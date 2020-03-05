@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const $rq = {
+const rq = {
   init() {
     axios.defaults.baseURL = process.env.VUE_APP_API_URL;
   },
@@ -22,4 +22,4 @@ const $rq = {
   },
 };
 
-export default $rq;
+export default rq;
