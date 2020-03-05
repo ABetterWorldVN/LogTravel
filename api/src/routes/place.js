@@ -23,4 +23,12 @@ router.post('/', (req, res) => {
   });
 });
 
+router.delete('/', (req, res) => {
+  const id = req.body.id;
+  // PlaceModel.findByIdAndDelete({_id: id}, (err, doc) => {
+  PlaceModel.deleteOne({id}, (err) => {
+    if (!err) return res.json();
+  });
+});
+
 module.exports = router;
