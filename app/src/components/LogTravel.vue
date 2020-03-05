@@ -18,27 +18,52 @@
 
         <div class="form-group">
           <label for="visitDate">Visit date</label>
-          <input v-model="formData.visitDate" type="date" class="form-control" id="visitDate" aria-describedby="visitDate" />
+          <input
+            v-model="formData.visitDate"
+            type="date"
+            class="form-control"
+            id="visitDate"
+            aria-describedby="visitDate"
+          />
         </div>
 
         <div class="form-group">
           <label for="longitude">Longitude</label>
-          <input v-model="formData.long" type="text" class="form-control" id="longitude" aria-describedby="longitude" />
+          <input
+            v-model="formData.long"
+            type="text"
+            class="form-control"
+            id="longitude"
+            aria-describedby="longitude"
+          />
         </div>
 
         <div class="form-group">
           <label for="latitude">Latitude</label>
-          <input v-model="formData.lat" type="text" class="form-control" id="latitude" aria-describedby="latitude" />
+          <input
+            v-model="formData.lat"
+            type="text"
+            class="form-control"
+            id="latitude"
+            aria-describedby="latitude"
+          />
         </div>
 
         <div class="form-group">
           <label for="rating">Rating</label>
-          <input v-model="formData.rating" type="number" class="form-control" id="rating" aria-describedby="rating" />
+          <input
+            v-model="formData.rating"
+            type="number"
+            class="form-control"
+            id="rating"
+            aria-describedby="rating"
+          />
         </div>
 
         <div class="form-group">
           <label for="comment">Comment</label>
-          <textarea v-model="formData.comment"
+          <textarea
+            v-model="formData.comment"
             class="form-control"
             id="comment"
             aria-describedby="comment"
@@ -62,10 +87,12 @@
     </div>
 
     <ul>
-      <log-travel-item 
-        v-for="(place, index) in places" :key="index" :place="place"
-        @deletePlace="deletePlace"> 
-      </log-travel-item>
+      <log-travel-item
+        v-for="(place, index) in places"
+        :key="index"
+        :place="place"
+        @deletePlace="deletePlace"
+      ></log-travel-item>
     </ul>
   </div>
 </template>
@@ -109,11 +136,16 @@ export default {
       this.shouldShowFormFn();
       this.places = [...this.places, newlyAdded.data];
     },
-    deletePlace(id){
+    async deletePlace(id){
       // TODO: delete call API
       console.info('parent ' + id);
-      const place = this.places.find(x => x._id === id);
-      if (place) this.places.splice(this.places.indexOf(place), 1);
+      const deleteRes = await API.deletePlace('/places', id);
+
+      if(deleteRes && deleteRes.status === 200){
+        const place = this.places.find(x => x._id === id);
+        if (place) this.places.splice(this.places.indexOf(place), 1);
+      }
+      //console.info(deleteRes);
     }
   },
   mounted() {

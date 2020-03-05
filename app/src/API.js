@@ -8,5 +8,9 @@ export default {
 
   async createPlace(url, data){
     return await rq.post(url, data);
+  },
+
+  async deletePlace(url, data){
+    return await rq.delete(url, data);
   }
 }
